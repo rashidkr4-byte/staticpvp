@@ -1,0 +1,43 @@
+{
+  "serverName": "Static Club",
+  "serverIp": "staticpvp.qd.je",
+  "version": "1.21.2+",
+  "discordLink": "https://discord.gg/bXn2q2PdZu",
+  "tierTestLink": "https://discord.gg/YwyrDnmdJK",
+  "leaderboardLink": "https://tierlist-bot.vercel.app/peak-tiers",
+  "adminUser": "entothic",
+  "adminPass": "muhammedkr1",
+  "products": [
+    {
+      "id": 1,
+      "name": "VIP (Permanent)",
+      "price": 19.99,
+      "category": "Ranks",
+      "description": "Lifetime permanent server rank benefits.",
+      "features": [
+        "Armor Trim Customizer",
+        "Shield Pattern Customizer",
+        "Customize Item Names",
+        "+3 Vanilla / Custom Kit Slots",
+        "+8 Max Party Size (8 -> 16)",
+        "Purple Name Color & TAB Priority",
+        "Elytra & Wind Charges at Spawn"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "VIP+ (1 Month)",
+      "price": 9.99,
+      "category": "Ranks",
+      "description": "Expires after 30 days. Requires VIP rank.",
+      "warning": "⚠️ Requires VIP rank to purchase this package. VIP+ is not permanent.",
+      "features": [
+        "Display Name Customizer",
+        "Queue Priority when server is full",
+        "Party Size Increase -> 32",
+        "Public Parties & /partyannounce",
+        "\"Host Battle\" Party Mode"
+      ]
+    }
+  ]
+}

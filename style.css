@@ -1,10 +1,20 @@
-/* style.css */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --bg-main: #121214;
+    --bg-main: #09090b;
+    --bg-card: rgba(24, 24, 27, 0.65);
     --text-main: #f4f4f5;
-    --border-color: rgba(39, 39, 42, 0.6);
+    --text-muted: #a1a1aa;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --accent-red: #ef4444;
+}
+
+.light {
+    --bg-main: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: rgba(0, 0, 0, 0.08);
 }
 
 body {
@@ -15,19 +25,23 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Custom Scrollbar */
+.glass-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: #121214;
+    background: var(--bg-main);
 }
 ::-webkit-scrollbar-thumb {
     background: #27272a;
     border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #3f3f46;
 }
