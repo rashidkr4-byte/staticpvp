@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Club — Modern Minecraft PvP Practice</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="selection:bg-red-500 selection:text-white transition-colors duration-300">
+
+    <header class="w-full border-b border-zinc-800/60 bg-[#121214]/80 backdrop-blur-md sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+                <img src="logo.png" alt="Static Club Logo" class="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]" onerror="this.src='https://api.iconify.design/lucide:shield.svg?color=%23ef4444'">
+                <span class="font-extrabold text-xl tracking-tight flex items-center gap-1.5">
+                    <span class="text-red-500">Static</span> Club
+                </span>
+            </div>
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-zinc-400">
+                <button onclick="switchTab('home')" class="hover:text-zinc-100 transition text-zinc-100 cursor-pointer">Home</button>
+                <button onclick="switchTab('store')" class="hover:text-zinc-100 transition cursor-pointer">Store</button>
+                <a href="https://discord.gg/bXn2q2PdZu" target="_blank" class="hover:text-zinc-100 transition flex items-center gap-1.5">Discord <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+                <button onclick="switchTab('rules')" class="hover:text-zinc-100 transition cursor-pointer">Rules</button>
+                <a href="https://tierlist-bot.vercel.app/peak-tiers" target="_blank" class="hover:text-zinc-100 transition flex items-center gap-1.5">Leaderboard <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-zinc-100 hover:border-zinc-700 transition cursor-pointer shadow-sm">
+                    <i class="fa-solid fa-sun hidden dark:inline text-amber-400"></i>
+                    <i class="fa-solid fa-moon inline dark:hidden text-zinc-600"></i>
+                </button>
+                <div id="authContainer" class="flex items-center gap-3">
+                    <button onclick="openAuthModal('login')" class="px-4 py-2 text-sm font-semibold text-zinc-300 hover:text-white transition cursor-pointer">Login</button>
+                    <button onclick="openAuthModal('register')" class="px-4 py-2 text-sm font-semibold bg-red-600 hover:bg-red-500 text-white rounded-xl shadow-lg shadow-red-600/20 transition cursor-pointer">Register</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <div id="tab-home" class="tab-content max-w-7xl mx-auto px-6 py-16 flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div class="max-w-xl space-y-6">
+                <h1 class="text-4xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                    <span class="text-red-500 drop-shadow-[0_0_20px_rgba(239,68,68,0.3)]">Static Club</span> is a modern Minecraft PvP practice server.
+                </h1>
+                <p class="text-zinc-400 text-lg leading-relaxed">
+                    Queue up for a variety of gamemodes, battle in party fights, and more.
+                </p>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
+                    <div onclick="copyIP()" class="group flex items-center gap-3 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 px-5 py-3.5 rounded-2xl cursor-pointer transition shadow-inner">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-sm tracking-wide text-zinc-200">mcpvp.club</span>
+                            <span class="text-xs text-zinc-500">1.21.2+ • Java Only</span>
+                        </div>
+                        <i class="fa-regular fa-clone text-zinc-400 group-hover:text-red-500 transition ml-4"></i>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 pt-1">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </span>
+                    <span class="text-sm font-medium text-zinc-400">2,695 online</span>
+                </div>
+                <div class="pt-4 flex items-center gap-3 flex-wrap">
+                    <a href="https://discord.gg/YwyrDnmdJK" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm font-semibold hover:bg-zinc-800 text-zinc-300 hover:text-white transition shadow-sm">
+                        <span>Want To Tier Test?</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="w-full lg:w-[540px] aspect-video bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl relative group">
+                <img src="preview.png" alt="Server Preview" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1627856013091-fed6e4e3009d?auto=format&fit=crop&w=1000&q=80'">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+        </div>
+
+        <div id="tab-store" class="tab-content hidden max-w-7xl mx-auto px-6 py-16 space-y-12">
+            <div class="text-center space-y-3">
+                <h1 class="text-4xl font-extrabold tracking-tight">Static Club Store</h1>
+                <div class="flex items-center justify-center gap-3 pt-2">
+                    <span class="px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-xl text-xs font-mono text-zinc-400">mcpvp.club</span>
+                    <a href="https://discord.gg/bXn2q2PdZu" target="_blank" class="px-3 py-1 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 rounded-xl text-xs font-semibold text-zinc-300 transition flex items-center gap-1.5">Join our Discord</a>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-bold">Ranks & Packages</h2>
+                    <button id="adminAddBtn" onclick="openAdminModal()" class="hidden px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition shadow-lg shadow-red-600/20 flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-plus text-xs"></i> Add Store Item
+                    </button>
+                </div>
+                <div id="storeGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group">
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-start">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-2xl font-bold shadow-inner">
+                                    <i class="fa-solid fa-crown"></i>
+                                </div>
+                                <span class="text-2xl font-black text-white">$19.99 <span class="text-xs font-medium text-zinc-500">USD</span></span>
+                            </div>
+                            <div class="space-y-1">
+                                <h3 class="text-xl font-bold">VIP (Permanent)</h3>
+                                <p class="text-xs text-zinc-400">Lifetime permanent server rank benefits.</p>
+                            </div>
+                            <ul class="space-y-2.5 text-sm text-zinc-300">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> Armor Trim Customizer</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> Shield Pattern Customizer</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> Customize Item Names</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> +3 Vanilla / Custom Kit Slots</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> +8 Max Party Size (8 -> 16)</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> Purple Name Color & TAB Priority</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> Elytra & Wind Charges at Spawn</li>
+                            </ul>
+                        </div>
+                        <div class="pt-8">
+                            <button onclick="addToBasket('VIP (Permanent)', 19.99)" class="w-full py-3.5 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-bold transition shadow-lg shadow-red-600/20 flex items-center justify-center gap-2 cursor-pointer">
+                                <span>Add to Basket</span>
+                                <i class="fa-solid fa-bag-shopping text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group">
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-start">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl font-bold shadow-inner">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <span class="text-2xl font-black text-white">$9.99 <span class="text-xs font-medium text-zinc-500">USD</span></span>
+                            </div>
+                            <div class="space-y-1">
+                                <h3 class="text-xl font-bold">VIP+ (1 Month)</h3>
+                                <p class="text-xs text-zinc-400">Expires after 30 days. Requires VIP rank.</p>
+                            </div>
+                            <div class="p-3 bg-red-950/30 border border-red-500/20 rounded-xl space-y-1 text-xs text-red-200">
+                                <p class="font-semibold">⚠️ Requires VIP rank to purchase this package.</p>
+                                <p class="text-red-300/80">This rank expires after 30 days. VIP+ is not permanent.</p>
+                            </div>
+                            <ul class="space-y-2.5 text-sm text-zinc-300">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> Display Name Customizer</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> Queue Priority when server is full</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> Party Size Increase -> 32</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> Public Parties & /partyannounce</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-red-500 text-xs"></i> "Host Battle" Party Mode</li>
+                            </ul>
+                        </div>
+                        <div class="pt-8">
+                            <button onclick="addToBasket('VIP+ (1 Month)', 9.99)" class="w-full py-3.5 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-bold transition shadow-lg shadow-red-600/20 flex items-center justify-center gap-2 cursor-pointer">
+                                <span>Add to Basket</span>
+                                <i class="fa-solid fa-bag-shopping text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-rules" class="tab-content hidden max-w-4xl mx-auto px-6 py-16 space-y-8">
+            <div class="space-y-2">
+                <h1 class="text-3xl font-extrabold tracking-tight">In-game Rules</h1>
+                <p class="text-sm text-zinc-400">Please adhere strictly to our community guidelines to avoid punishment.</p>
+            </div>
+            <div class="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-8 space-y-6 text-sm text-zinc-300 shadow-xl">
+                <div class="space-y-2">
+                    <h3 class="font-bold text-white flex items-center gap-2 text-base"><span class="w-6 h-6 rounded-lg bg-red-500/20 text-red-500 flex items-center justify-center text-xs">1</span> Keep chat clean of spam, flooding, toxicity, discrimination, and inappropriate content.</h3>
+                    <ul class="list-disc pl-10 space-y-1 text-zinc-400">
+                        <li>Do not attempt to duel or gather players by a specific gender or age in public chat.</li>
+                        <li>Do not attempt to date players in public chat.</li>
+                    </ul>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bold text-white flex items-center gap-2 text-base"><span class="w-6 h-6 rounded-lg bg-red-500/20 text-red-500 flex items-center justify-center text-xs">2</span> Do not use any disallowed modifications.</h3>
+                    <ul class="list-disc pl-10 space-y-1 text-zinc-400">
+                        <li>This includes macros and autoclickers. Double-binding keys for game actions is forbidden.</li>
+                        <li>Using external programs (e.g., FilterKeys) to modify keyboard repeat rates is prohibited.</li>
+                        <li>In general, if a mod lets you do something impossible in vanilla, it is likely disallowed.</li>
+                    </ul>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bold text-white flex items-center gap-2 text-base"><span class="w-6 h-6 rounded-lg bg-red-500/20 text-red-500 flex items-center justify-center text-xs">3</span> Do not advertise.</h3>
+                    <ul class="list-disc pl-10 space-y-1 text-zinc-400">
+                        <li>Livestreams on Static Club are allowed via "live @username" messages only.</li>
+                        <li>You are NOT allowed to publicly advertise groups, Minecraft servers, or SMPs.</li>
+                    </ul>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bold text-white flex items-center gap-2 text-base"><span class="w-6 h-6 rounded-lg bg-red-500/20 text-red-500 flex items-center justify-center text-xs">4</span> Do not threaten the safety of other players.</h3>
+                    <p class="pl-8 text-zinc-400">Doxing, threatening, or harassing any individuals is completely unacceptable.</p>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bold text-white flex items-center gap-2 text-base"><span class="w-6 h-6 rounded-lg bg-red-500/20 text-red-500 flex items-center justify-center text-xs">5-8</span> General Conduct</h3>
+                    <p class="pl-8 text-zinc-400">Do not exploit server performance, impersonate staff, use inappropriate skins/names, or evade punishments.</p>
+                </div>
+                <div class="pt-4 border-t border-zinc-800 text-xs text-zinc-500 font-mono">
+                    Last updated: August 20, 2026
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full border-t border-zinc-800/60 py-8 text-center text-xs text-zinc-500 space-y-2">
+        <p>Not affiliated with Mojang AB or Microsoft.</p>
+        <p>Contact: <a href="mailto:admin@mcpvp.club" class="hover:underline text-zinc-400">admin@mcpvp.club</a> • <a href="#" class="hover:underline text-zinc-400">Privacy Policy</a></p>
+    </footer>
+
+    <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 max-w-md w-full shadow-2xl relative space-y-6">
+            <button onclick="closeAuthModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="space-y-2 text-center">
+                <h2 id="authModalTitle" class="text-2xl font-bold">Welcome Back</h2>
+                <p id="authModalSub" class="text-xs text-zinc-400">Log in with your administrator or member credentials</p>
+            </div>
+            <form id="authForm" onsubmit="handleAuth(event)" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-zinc-400">Email Address</label>
+                    <input type="email" id="authEmail" required class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl focus:outline-none focus:border-red-500 text-sm text-zinc-200" placeholder="entothic@gmail.com">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-zinc-400">Password</label>
+                    <input type="password" id="authPass" required class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl focus:outline-none focus:border-red-500 text-sm text-zinc-200" placeholder="••••••••">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-red-600 hover:bg-red-500 text-white rounded-xl font-bold transition shadow-lg shadow-red-600/20 cursor-pointer">Continue</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 max-w-lg w-full shadow-2xl relative space-y-6">
+            <button onclick="closeAdminModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="space-y-1">
+                <h2 class="text-2xl font-bold">Add Store Item (Admin Panel)</h2>
+                <p class="text-xs text-zinc-400">Create a new package or rank with custom embeds and descriptions.</p>
+            </div>
+            <form onsubmit="handleAddItem(event)" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-zinc-400">Item Name</label>
+                    <input type="text" id="newItemName" required class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl focus:outline-none focus:border-red-500 text-sm text-zinc-200" placeholder="e.g., MVP Rank">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-zinc-400">Price ($ USD)</label>
+                    <input type="number" step="0.01" id="newItemPrice" required class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl focus:outline-none focus:border-red-500 text-sm text-zinc-200" placeholder="14.99">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-zinc-400">Embed Details / Description</label>
+                    <textarea id="newItemDesc" required rows="3" class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl focus:outline-none focus:border-red-500 text-sm text-zinc-200" placeholder="Custom color, priority access..."></textarea>
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-red-600 hover:bg-red-500 text-white rounded-xl font-bold transition shadow-lg shadow-red-600/20 cursor-pointer">Publish Item</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentAuthMode = 'login';
+        let loggedInUser = localStorage.getItem('static_user') || null;
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.style.backgroundColor = '#ffffff';
+            } else {
+                html.classList.add('dark');
+                html.style.backgroundColor = '#121214';
+            }
+        }
+
+        function copyIP() {
+            navigator.clipboard.writeText('mcpvp.club');
+            alert('Server IP copied to clipboard: mcpvp.club');
+        }
+
+        function openAuthModal(mode) {
+            currentAuthMode = mode;
+            document.getElementById('authModalTitle').innerText = mode === 'login' ? 'Welcome Back' : 'Create Account';
+            document.getElementById('authModalSub').innerText = mode === 'login' ? 'Log in with your administrator or member credentials' : 'Register a new account to join Static Club';
+            document.getElementById('authModal').classList.remove('hidden');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.add('hidden');
+        }
+
+        function handleAuth(e) {
+            e.preventDefault();
+            const email = document.getElementById('authEmail').value;
+            const pass = document.getElementById('authPass').value;
+
+            // Strict Admin Authentication Check
+            if (email === 'entothic@gmail.com' && pass === 'muhammedkr1') {
+                loggedInUser = email;
+                localStorage.setItem('static_user', email);
+                alert('Admin Authentication Successful!');
+                updateAuthUI();
+                closeAuthModal();
+                switchTab('store');
+                return;
+            }
+
+            loggedInUser = email;
+            localStorage.setItem('static_user', email);
+            alert('Authentication Successful!');
+            updateAuthUI();
+            closeAuthModal();
+        }
+
+        function logout() {
+            localStorage.removeItem('static_user');
+            loggedInUser = null;
+            updateAuthUI();
+            switchTab('home');
+        }
+
+        function updateAuthUI() {
+            const container = document.getElementById('authContainer');
+            const adminBtn = document.getElementById('adminAddBtn');
+
+            if (loggedInUser) {
+                container.innerHTML = `
+                    <div class="flex items-center gap-3 bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-xl">
+                        <span class="text-xs font-semibold text-zinc-300 truncate max-w-[120px]">${loggedInUser}</span>
+                        <button onclick="logout()" class="text-zinc-500 hover:text-red-500 text-xs cursor-pointer"><i class="fa-solid fa-right-from-bracket"></i></button>
+                    </div>
+                `;
+                if (loggedInUser === 'entothic@gmail.com') {
+                    adminBtn.classList.remove('hidden');
+                } else {
+                    adminBtn.classList.add('hidden');
+                }
+            } else {
+                container.innerHTML = `
+                    <button onclick="openAuthModal('login')" class="px-4 py-2 text-sm font-semibold text-zinc-300 hover:text-white transition cursor-pointer">Login</button>
+                    <button onclick="openAuthModal('register')" class="px-4 py-2 text-sm font-semibold bg-red-600 hover:bg-red-500 text-white rounded-xl shadow-lg shadow-red-600/20 transition cursor-pointer">Register</button>
+                `;
+                adminBtn.classList.add('hidden');
+            }
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        function handleAddItem(e) {
+            e.preventDefault();
+            const name = document.getElementById('newItemName').value;
+            const price = document.getElementById('newItemPrice').value;
+            const desc = document.getElementById('newItemDesc').value;
+
+            const grid = document.getElementById('storeGrid');
+            const newCard = document.createElement('div');
+            newCard.className = "bg-zinc-900/60 border border-zinc-800 rounded-3xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group";
+            newCard.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex justify-between items-start">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/30 flex items-center justify-center text-red-400 text-2xl font-bold shadow-inner">
+                            <i class="fa-solid fa-box-archive"></i>
+                        </div>
+                        <span class="text-2xl font-black text-white">$${price} <span class="text-xs font-medium text-zinc-500">USD</span></span>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-xl font-bold">${name}</h3>
+                        <p class="text-xs text-zinc-400">${desc}</p>
+                    </div>
+                </div>
+                <div class="pt-8">
+                    <button onclick="addToBasket('${name}', ${price})" class="w-full py-3.5 bg-red-600 hover:bg-red-500 text-white rounded-xl font-bold transition shadow-lg shadow-red-600/20 flex items-center justify-center gap-2 cursor-pointer">
+                        <span>Add to Basket</span>
+                        <i class="fa-solid fa-bag-shopping text-sm"></i>
+                    </button>
+                </div>
+            `;
+            grid.appendChild(newCard);
+            closeAdminModal();
+            alert('Item added successfully to the store!');
+        }
+
+        function addToBasket(itemName, price) {
+            // Redirects to Main Discord Server to open purchase ticket
+            window.open('https://discord.gg/bXn2q2PdZu', '_blank');
+        }
+
+        updateAuthUI();
+    </script>
+</body>
+</html>

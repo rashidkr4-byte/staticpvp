@@ -1,0 +1,22 @@
+{
+  "name": "static-club-pvp",
+  "version": "1.0.0",
+  "description": "Static Club Minecraft Practice PvP Platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "minecraft",
+    "pvp",
+    "practice",
+    "server",
+    "vercel"
+  ],
+  "author": "Static Club Team",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}
